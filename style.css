@@ -1,0 +1,267 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #fff0f5, #ffeef2);
+  font-family: 'Merriweather', serif;
+  overflow: hidden;
+}
+
+/* ---------- Phong bì ---------- */
+.envelope {
+  position: relative;
+  width: 420px;
+  height: 260px;
+  border-radius: 16px;
+  background: linear-gradient(160deg, #fff, #ffd6e8);
+  border: 4px solid gold;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.22);
+  cursor: pointer;
+  overflow: hidden;
+  perspective: 1200px;
+  transition: transform 250ms ease, box-shadow 0.6s ease, border-color 0.6s ease;
+}
+.envelope.open {
+  transform: scale(1.04);
+  border-color: #ff80ab;
+  box-shadow: 0 0 25px rgba(233,30,99,0.6),
+              0 0 45px rgba(233,30,99,0.4);
+  animation: glowPulse 2s infinite alternate;
+}
+@keyframes glowPulse {
+  from { box-shadow: 0 0 20px rgba(233,30,99,0.5), 0 0 40px rgba(233,30,99,0.3); }
+  to   { box-shadow: 0 0 35px rgba(233,30,99,0.8), 0 0 60px rgba(233,30,99,0.5); }
+}
+
+/* Flap */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56%;
+  background: linear-gradient(to bottom, #e91e63, #f48fb1);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: 50% 0;
+  backface-visibility: hidden;
+  transition: transform 1.4s cubic-bezier(.77,0,.18,1);
+  z-index: 5;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.envelope.open .flap {
+  transform: rotateX(-180deg);
+  z-index: 1;
+  box-shadow: none;
+}
+
+/* Seal */
+.seal {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 2.2rem;
+  z-index: 6;
+  transition: transform 400ms ease, opacity 400ms ease;
+  pointer-events: none;
+}
+.envelope.open .seal {
+  opacity: 0;
+  transform: translate(-50%,-50%) scale(0);
+}
+
+/* ---------- Lá thư bên trong ---------- */
+.letter {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffdf2;
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  background-size: cover;
+  border-radius: 12px;
+  border: 1px solid #d8c49c;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.08),
+              0 6px 18px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.97);
+  z-index: 2;
+  transition: opacity 0.8s ease 0s, transform 0.8s ease 0s;
+  pointer-events: none;
+}
+.envelope.open .letter {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 4;
+  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s; 
+  pointer-events: auto;
+}
+
+.letter-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      
+  justify-content: flex-start;
+  text-align: center;
+  padding: 30px 20px;
+  overflow-y: auto;
+}
+
+.letter-content h2 {
+  margin: 0 0 12px;
+  color: #5a3e1b;
+  font-size: 2.6rem;
+  font-family: 'Great Vibes', cursive;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.letter-content p {
+  margin: 0;
+  color: #111;
+  font-size: 1.2rem;
+  line-height: 1.9;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-weight: 600;
+  text-align: center;
+  white-space: pre-wrap;
+  text-shadow: 0 1px 0 #fff;
+}
+
+/* Caret nhấp nháy */
+.typing::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #e91e63;
+  margin-left: 6px;
+  vertical-align: middle;
+  animation: blink 900ms steps(2, start) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Tim & ảnh rơi ---------- */
+.heart {
+  position: fixed;
+  top: -20px;
+  font-size: 18px;
+  opacity: 0.95;
+  animation: heartFall linear forwards;
+  pointer-events: none;
+}
+@keyframes heartFall {
+  from { transform: translateY(0) translateX(0) rotate(0deg) scale(1); opacity: 1; }
+  to   { transform: translateY(110vh) translateX(var(--drift)) rotate(360deg) scale(0.9); opacity: 0; }
+}
+.photo {
+  position: fixed;
+  top: -200px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 5px solid #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  animation: photoFall linear forwards;
+  pointer-events: none;
+}
+@keyframes photoFall {
+  from { transform: translateY(0) translateX(0) rotate(0deg) scale(1); opacity: 1; }
+  to   { transform: translateY(110vh) translateX(var(--drift)) rotate(360deg) scale(0.85); opacity: 0; }
+}
+
+/* ---------- Gallery overlay ---------- */
+#galleryBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #e91e63;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  font-size: 1rem;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 1000;
+}
+#galleryBtn:hover { background: #c2185b; }
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* ✅ để caption nằm dưới ảnh */
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 250ms ease, visibility 250ms ease;
+}
+#overlay.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+#overlay img {
+  max-width: 90%;
+  max-height: 80%;
+  object-fit: contain;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 600ms ease, transform 600ms ease;
+  border-radius: 12px;
+  border: 12px solid #fff; /* ✅ khung trắng */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35); /* ✅ bóng mềm */
+  margin-bottom: 10px;
+}
+#overlay img.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ✅ Caption */
+#caption {
+  font-size: 1rem;
+  font-style: italic;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  white-space: pre-wrap;
+}
+#caption.typing::after {
+  content: "|";
+  display: inline-block;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+#closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+/* ---------- Hiệu ứng vẽ tay ngoài phong bì ---------- */
+.envelope {
+  border: 3px dashed #333;
+}

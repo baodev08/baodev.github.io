@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gửi tặng những người mẹ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Phong bì -->
+  <div class="envelope" id="envelope">
+    <div class="flap"></div>
+    <div class="seal">🎀</div>
+    <div class="letter">
+      <div class="letter-content">
+        <h2 id="title"></h2>
+        <p id="body"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tim + ảnh rơi -->
+  <div id="petals"></div>
+  <div id="photos"></div>
+
+  <!-- Nút mở gallery -->
+  <button id="galleryBtn">Nhấn vào điii</button>
+
+  <!-- Overlay ảnh -->
+  <div id="overlay" aria-hidden="true">
+    <button id="closeBtn" aria-label="Đóng">×</button>
+    <img id="overlayImg" src="" alt="Ảnh kỷ niệm" />
+    <div id="caption"></div>
+  </div>
+
+  <!-- ✅ Nhạc nền -->
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="v0f025gc0000cf96823c77u52mhm4tm0.mp3" type="audio/mpeg">
+    Trình duyệt không hỗ trợ audio.
+  </audio>
+
+  <!-- Rough.js -->
+  <script src="https://cdn.jsdelivr.net/npm/roughjs@4.3.1/bundled/rough.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
