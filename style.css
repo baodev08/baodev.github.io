@@ -313,7 +313,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;   /* Căn giữa theo chiều dọc */
-    padding: 2vh 10px 10px; /* Nhích lên so với 4vh */
+    padding: 0vh 10px 10px; /* Nhích lên so với 4vh */
   }
 
   .envelope {
