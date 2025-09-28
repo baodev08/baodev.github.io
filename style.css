@@ -307,3 +307,46 @@ body {
   }
 }
 
+@media (max-width: 600px) {
+  /* Đưa phong bì ra gần giữa màn hình hơn */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;   /* Căn giữa theo chiều dọc */
+    padding: 6vh 10px 10px; /* Đẩy phong bì xuống một chút từ trên */
+  }
+
+  .envelope {
+    width: 95%;
+    height: auto;
+    aspect-ratio: 420 / 260; /* Giữ đúng tỷ lệ gốc */
+  }
+
+  .letter-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .letter-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .photo {
+    width: 60px !important;
+    height: 60px !important;
+    border-width: 3px;
+  }
+
+  #overlay img {
+    max-width: 95%;
+    max-height: 70%;
+    border-width: 6px;
+  }
+
+  #galleryBtn {
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
