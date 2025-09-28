@@ -201,18 +201,22 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("DOMContentLoaded", () => {
   const env = document.getElementById("envelope");
   if (env) {
+    const rect = env.getBoundingClientRect();
+
     const sketchCanvas = document.createElement("canvas");
-    sketchCanvas.width = 500;
-    sketchCanvas.height = 350;
+    sketchCanvas.width = rect.width;
+    sketchCanvas.height = rect.height;
     sketchCanvas.style.position = "absolute";
-    sketchCanvas.style.left = "50%";
-    sketchCanvas.style.top = "50%";
-    sketchCanvas.style.transform = "translate(-50%, -50%)";
+    sketchCanvas.style.top = "0";
+    sketchCanvas.style.left = "0";
     sketchCanvas.style.pointerEvents = "none";
-    document.body.appendChild(sketchCanvas);
+    env.appendChild(sketchCanvas);
 
     const rc = rough.canvas(sketchCanvas);
-    rc.rectangle(50, 50, 400, 250, {
+
+    // Vẽ viền hơi nhỏ hơn phong bì (chừa 10px mỗi cạnh)
+    const padding = 10; // ✅ chỉnh con số này để viền nhỏ nhiều hay ít
+    rc.rectangle(padding, padding, rect.width - padding * 2, rect.height - padding * 2, {
       roughness: 2.5,
       stroke: "black",
       fill: "beige",
