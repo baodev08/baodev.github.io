@@ -308,12 +308,12 @@ body {
 }
 
 @media (max-width: 600px) {
-  /* Đưa phong bì ra gần giữa màn hình hơn (nhích lên chút) */
+  /* Đưa phong bì ra cân đối hơn (nhích lên thêm chút) */
   body {
     display: flex;
     justify-content: center;
     align-items: center;   /* Căn giữa theo chiều dọc */
-    padding: 4vh 10px 10px; /* Nhích lên so với 6vh */
+    padding: 2vh 10px 10px; /* Nhích lên so với 4vh */
   }
 
   .envelope {
