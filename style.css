@@ -275,6 +275,7 @@ body {
   .envelope {
     width: 95%;
     height: auto;
+    aspect-ratio: 420 / 260; /* ✅ giữ đúng tỷ lệ gốc */
   }
 
   .letter-content h2 {
@@ -305,3 +306,4 @@ body {
     font-size: 0.9rem;
   }
 }
+
