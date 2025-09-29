@@ -15,10 +15,11 @@ body {
   position: relative;
   width: 420px;
   height: 260px;
-  border-radius: 16px;
-  background: linear-gradient(160deg, #fff, #ffd6e8);
-  border: 4px solid gold;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.22);
+  border-radius: 14px;
+  background: #fff5f8 url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  background-size: cover;
+  border: 2px solid #e6a6b4;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
   cursor: pointer;
   overflow: hidden;
   perspective: 1200px;
@@ -26,24 +27,19 @@ body {
 }
 .envelope.open {
   transform: scale(1.04);
-  border-color: #ff80ab;
-  box-shadow: 0 0 25px rgba(233,30,99,0.6),
-              0 0 45px rgba(233,30,99,0.4);
-  animation: glowPulse 2s infinite alternate;
-}
-@keyframes glowPulse {
-  from { box-shadow: 0 0 20px rgba(233,30,99,0.5), 0 0 40px rgba(233,30,99,0.3); }
-  to   { box-shadow: 0 0 35px rgba(233,30,99,0.8), 0 0 60px rgba(233,30,99,0.5); }
+  border-color: #d46a85;
+  box-shadow: 0 0 25px rgba(212,106,133,0.5),
+              0 0 45px rgba(212,106,133,0.3);
 }
 
-/* Flap */
+/* Nắp phong bì */
 .flap {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 56%;
-  background: linear-gradient(to bottom, #e91e63, #f48fb1);
+  background: linear-gradient(to bottom, #f7c5d3, #ffe6eb);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: 50% 0;
   backface-visibility: hidden;
@@ -57,23 +53,29 @@ body {
   box-shadow: none;
 }
 
-/* Seal */
+/* Trái tim ở giữa phong bì */
 .seal {
   position: absolute;
-  top: 48%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  font-size: 2.2rem;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: #d46a85; /* hồng đậm hơn phong bì */
+  text-shadow: 0 3px 6px rgba(0,0,0,0.2),
+               0 -2px 4px rgba(255,255,255,0.4);
   z-index: 6;
-  transition: transform 400ms ease, opacity 400ms ease;
   pointer-events: none;
+}
+.seal::before {
+  content: "❤";
 }
 .envelope.open .seal {
   opacity: 0;
-  transform: translate(-50%,-50%) scale(0);
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* ---------- Lá thư bên trong ---------- */
+/* ---------- Lá thư ---------- */
 .letter {
   position: absolute;
   inset: 0;
@@ -116,7 +118,7 @@ body {
 }
 
 .letter-content h2 {
-  margin: 20 0 12px;
+  margin: 20px 0 6px; /* giảm khoảng cách dưới từ 12px → 6px */
   color: #5a3e1b;
   font-size: 2.6rem;
   font-family: 'Great Vibes', cursive;
@@ -124,7 +126,7 @@ body {
 }
 
 .letter-content p {
-  margin: 0;
+  margin-top: 4px; /* thêm chút margin trên để cân chỉnh đẹp */
   color: #111;
   font-size: 1.2rem;
   line-height: 1.9;
@@ -135,6 +137,7 @@ body {
   white-space: pre-wrap;
   text-shadow: 0 1px 0 #fff;
 }
+
 
 /* Caret nhấp nháy */
 .typing::after {
@@ -202,7 +205,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; /* ✅ để caption nằm dưới ảnh */
+  flex-direction: column;
   z-index: 2000;
   opacity: 0;
   visibility: hidden;
@@ -223,8 +226,8 @@ body {
   transform: scale(1.05);
   transition: opacity 600ms ease, transform 600ms ease;
   border-radius: 12px;
-  border: 12px solid #fff; /* ✅ khung trắng */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35); /* ✅ bóng mềm */
+  border: 12px solid #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
   margin-bottom: 10px;
 }
 #overlay img.show {
@@ -232,7 +235,6 @@ body {
   transform: scale(1);
 }
 
-/* ✅ Caption */
 #caption {
   font-size: 1rem;
   font-style: italic;
@@ -261,65 +263,18 @@ body {
   border: none;
   cursor: pointer;
 }
-/* ---------- Hiệu ứng vẽ tay ngoài phong bì ---------- */
-.envelope {
-  border: 3px dashed #333;
-}
-/* ✅ Responsive cho điện thoại */
+
+/* ---------- Responsive ---------- */
 @media (max-width: 600px) {
   body {
-    align-items: flex-start; /* Đẩy phong bì lên trên thay vì giữa màn hình */
+    align-items: flex-start;
     padding: 10px;
   }
 
   .envelope {
     width: 95%;
     height: auto;
-    aspect-ratio: 420 / 260; /* ✅ giữ đúng tỷ lệ gốc */
-  }
-
-  .letter-content h2 {
-    font-size: 1.8rem;
-  }
-
-  .letter-content p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .photo {
-    width: 60px !important;
-    height: 60px !important;
-    border-width: 3px;
-  }
-
-  #overlay img {
-    max-width: 95%;
-    max-height: 70%;
-    border-width: 6px;
-  }
-
-  #galleryBtn {
-    bottom: 10px;
-    right: 10px;
-    padding: 10px 14px;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 600px) {
-  /* Đưa phong bì ra cân đối hơn (nhích lên thêm chút) */
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;   /* Căn giữa theo chiều dọc */
-    padding: 0vh 10px 10px; /* Nhích lên so với 4vh */
-  }
-
-  .envelope {
-    width: 95%;
-    height: auto;
-    aspect-ratio: 420 / 260; /* Giữ đúng tỷ lệ gốc */
+    aspect-ratio: 420 / 260;
   }
 
   .letter-content h2 {
