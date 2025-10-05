@@ -60,7 +60,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3rem;
-  color: #d46a85; /* hồng đậm hơn phong bì */
+  color: #d46a85;
   text-shadow: 0 3px 6px rgba(0,0,0,0.2),
                0 -2px 4px rgba(255,255,255,0.4);
   z-index: 6;
@@ -118,7 +118,7 @@ body {
 }
 
 .letter-content h2 {
-  margin: 20px 0 6px; /* giảm khoảng cách dưới từ 12px → 6px */
+  margin: 20px 0 6px;
   color: #5a3e1b;
   font-size: 2.6rem;
   font-family: 'Great Vibes', cursive;
@@ -126,7 +126,7 @@ body {
 }
 
 .letter-content p {
-  margin-top: 4px; /* thêm chút margin trên để cân chỉnh đẹp */
+  margin-top: 4px;
   color: #111;
   font-size: 1.2rem;
   line-height: 1.9;
@@ -137,7 +137,6 @@ body {
   white-space: pre-wrap;
   text-shadow: 0 1px 0 #fff;
 }
-
 
 /* Caret nhấp nháy */
 .typing::after {
