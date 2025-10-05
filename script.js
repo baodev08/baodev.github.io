@@ -60,6 +60,18 @@ document.addEventListener("DOMContentLoaded", () => {
     } else clearTyping();
   });
 
+  // Điều chỉnh vị trí phong bì trên mobile
+  function adjustEnvelopePosition() {
+    if (window.innerWidth <= 768) {
+      document.body.style.paddingTop = '20vh';
+    } else {
+      document.body.style.paddingTop = '0';
+    }
+  }
+  
+  adjustEnvelopePosition();
+  window.addEventListener('resize', adjustEnvelopePosition);
+
   const heartColors = ["#ffc1e3", "#ffb6d9", "#ff99cc", "#ff80ab"];
   
   function createHeart() {
@@ -82,12 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "z7055045764829_06b5e26dc636c1f7cfd9718129bbc4fa.jpg",
     "z7057340576470_daec71520152c9ce9e82d80d1b7aeec1.jpg",
     "z7058159796001_001af9cffde1402cb73c134ce1f3457e.jpg",
-    "z7058725890064_3e7d55db610ac2f8d7215e9ddd5e2a92.jpg",
-    "z7057354208534_4752961c81280dcd8721966a36404f8d.jpg",
     "z7057355303240_8356b02f6d73468937cd8393e9a871df.jpg",
+    "z7057354208534_4752961c81280dcd8721966a36404f8d.jpg",
     "z7057353132952_2ade12be933f0165818bb741879af052.jpg",
-    "z7078697923262_b536583a821dcaa90406ac708e137e21.jpg",
-    "z7056580663882_344efe4c6fee4456b29d3ee6e6cf3c40.jpg"
+    "z7056580663882_344efe4c6fee4456b29d3ee6e6cf3c40.jpg",
+    "z7058725890064_3e7d55db610ac2f8d7215e9ddd5e2a92.jpg",
+    "z7078697923262_b536583a821dcaa90406ac708e137e21.jpg"
   ];
   
   function createPhoto() {
@@ -247,18 +259,9 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.innerHTML = `
       <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;">
         <canvas id="heartCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
-        <div id="ambientGlow" style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,20,147,0.15) 0%, rgba(255,105,180,0.08) 40%, transparent 70%); border-radius: 50%; opacity: 0; filter: blur(80px);"></div>
         <h1 id="mainText" style="position: relative; z-index: 10; color: rgba(255,235,200,0); font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 200; letter-spacing: clamp(6px, 2vw, 12px); text-align: center; padding: 0 40px; transform: translateY(50px) scale(0.9); text-shadow: none; line-height: 1.8; font-family: 'Great Vibes', cursive; opacity: 0; filter: blur(10px);">Cảm ơn vì tất cả</h1>
       </div>
     `;
-
-    setTimeout(() => {
-      const ambientGlow = document.getElementById('ambientGlow');
-      if (ambientGlow) {
-        ambientGlow.style.transition = 'opacity 2s ease';
-        ambientGlow.style.opacity = '1';
-      }
-    }, 100);
 
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
